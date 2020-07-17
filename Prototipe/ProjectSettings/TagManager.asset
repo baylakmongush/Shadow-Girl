@@ -9,6 +9,7 @@ TagManager:
   - character
   - wall
   - Menu
+  - menu_button
   layers:
   - Default
   - TransparentFX
