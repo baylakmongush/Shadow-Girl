@@ -36,11 +36,13 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BoxMovement.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CharacterManager.cs" />
-     <Compile Include="Assets\Scripts\TeleportToPast.cs" />
-     <Compile Include="Assets\Scripts\TeleportToPresent.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\BoxMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\CameraController.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\CharacterManager.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\Health.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\Menu.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\TeleportToPast.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\TeleportToPresent.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

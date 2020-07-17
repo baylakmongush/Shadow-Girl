@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - teleport
+  - character
+  - wall
+  - Menu
   layers:
   - Default
   - TransparentFX
