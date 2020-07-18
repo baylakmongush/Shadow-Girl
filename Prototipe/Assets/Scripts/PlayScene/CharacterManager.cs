@@ -34,7 +34,7 @@ public class CharacterManager : MonoBehaviour
     public bool isGrounded;
     Animator anim;
 
-    public BoxCollider2D    collider2D;
+    BoxCollider2D    collider2D;
     int _health;
     public Image[] hearts;
 
@@ -56,7 +56,7 @@ public class CharacterManager : MonoBehaviour
             hearts[1].enabled = true;
             hearts[2].enabled = false;
             hearts[2].GetComponent<AudioSource>().Play();
-            audio.Play();
+            gameObject.GetComponent<AudioSource>().Play();
         }
         if (_health == 1)
         {
@@ -64,7 +64,7 @@ public class CharacterManager : MonoBehaviour
             hearts[1].enabled = false;
             hearts[2].enabled = false;
             hearts[1].GetComponent<AudioSource>().Play();
-            audio.Play();
+            gameObject.GetComponent<AudioSource>().Play();
         }
         if (_health == 0)
         {
