@@ -13,6 +13,7 @@ TagManager:
   - teleport_item
   - character_position_past
   - transition
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /** TO SAVE CHARACTER POSITION **/
 public struct PlayerData
  {
      public Vector3 position;
      public Quaternion rotation;
+     public int     health;
  }
  
 public class StaticData
@@ -14,9 +16,10 @@ public class StaticData
      public static StaticData Instance {get;} = new StaticData();
      private StaticData()
      {
-         playerData = new PlayerData();//the new is just in case you want to change the struct to a class
-         playerData.position = Vector3.zero;
-         playerData.rotation = Quaternion.identity;            
+        playerData = new PlayerData();//the new is just in case you want to change the struct to a class
+        playerData.position = Vector3.zero;
+        playerData.rotation = Quaternion.identity;
+        playerData.health = 3;
      }    
      public PlayerData playerData;
 }
@@ -24,11 +27,13 @@ public class StaticData
 
 public class CharacterManager : MonoBehaviour
 {
+    public Image[] hearts;
     float speed = 2f;
     Rigidbody2D rigidbody;
     public float    jumpForce = 0.7f;
     public bool isGrounded;
     Animator anim;
+    private int _health;
 
     public BoxCollider2D    collider2D;
     void Start()
@@ -38,14 +43,26 @@ public class CharacterManager : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        _health = StaticData.Instance.playerData.health;
     }
     // Update is called once per frame
     void OnCollisionEnter2D(Collision2D col)
  	{
+         int i = 3;
+
      	if (col.gameObject.tag == ("Ground") && isGrounded == false)
      	{
          	isGrounded = true;
      	}
+         Debug.Log(_health);
+        if (col.gameObject.tag == ("Enemy") && _health > 0)
+     	{
+         	_health--;
+             hearts[_health].enabled = false;
+     	}
+        if (_health == 0)
+            Debug.Log("GAME OVER");
+
  	}
     private PlayerData GetData()
     {
