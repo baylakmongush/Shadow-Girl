@@ -16,6 +16,8 @@ TagManager:
   - Enemy
   - Damage
   - hearts
+  - MenuButton
+  - GameOver
   layers:
   - Default
   - TransparentFX

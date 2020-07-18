@@ -38,6 +38,9 @@ public class CharacterManager : MonoBehaviour
     int _health;
     public Image[] hearts;
 
+    AudioSource audio;
+
+
     void EnabledHearts()
     {
         if (_health == 3)
@@ -45,24 +48,31 @@ public class CharacterManager : MonoBehaviour
             hearts[0].enabled = true;
             hearts[1].enabled = true;
             hearts[2].enabled = true;
+
         }
         if (_health == 2)
         {
             hearts[0].enabled = true;
             hearts[1].enabled = true;
             hearts[2].enabled = false;
+            hearts[2].GetComponent<AudioSource>().Play();
+            audio.Play();
         }
         if (_health == 1)
         {
             hearts[0].enabled = true;
             hearts[1].enabled = false;
             hearts[2].enabled = false;
+            hearts[1].GetComponent<AudioSource>().Play();
+            audio.Play();
         }
         if (_health == 0)
         {
             hearts[0].enabled = false;
             hearts[1].enabled = false;
             hearts[2].enabled = false;
+            GameObject.FindWithTag("GameOver").GetComponent<AudioSource>().Play();
+            Debug.Log("FINISH");
         }
     }
     void Start()
@@ -75,6 +85,11 @@ public class CharacterManager : MonoBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         Debug.Log(StaticData.Instance.playerData.damage);
+        for(int i = 0; i < 3; i++)
+             hearts[i].GetComponent<AudioSource>().Stop();
+        audio = GetComponent<AudioSource>();
+        audio.Stop();
+        GameObject.FindWithTag("GameOver").GetComponent<AudioSource>().Stop();
     }
     // Update is called once per frame
     void OnCollisionEnter2D(Collision2D col)
@@ -127,7 +142,5 @@ public class CharacterManager : MonoBehaviour
             EnabledHearts();
             Debug.Log(_health);
         }
-        else if (_health == 0)
-            Debug.Log("FINISH");
     }
 }

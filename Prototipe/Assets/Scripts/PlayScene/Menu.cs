@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
     AudioSource audioData;
     void Start()
     {
-        audioData = GetComponent<AudioSource>();
+        audioData = GameObject.FindWithTag("MenuButton").GetComponent<AudioSource>();
         audioData.Stop();
     }
     public void ClickButton()
@@ -20,14 +20,14 @@ public class Menu : MonoBehaviour
             GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = true;
             Time.timeScale = 0f;
             pressed = false;
-           // audioData.Play();
+            audioData.Play();
         }
         else
         {
             GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
             Time.timeScale = 1f;
             pressed = true;
-           // audioData.Stop();
+            audioData.Stop();
         }
     }
 
@@ -35,7 +35,7 @@ public class Menu : MonoBehaviour
     {
         GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
         Time.timeScale = 1f;
-        GameObject.FindWithTag("menu_button").GetComponent<AudioSource>().Stop();
+        audioData.Stop();
     }
 
     public void QuitGame()
