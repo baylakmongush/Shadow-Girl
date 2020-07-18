@@ -8,7 +8,8 @@ public struct PlayerData
  {
      public Vector3 position;
      public Quaternion rotation;
-     public int     health;
+
+     public int damage;
  }
  
 public class StaticData
@@ -19,7 +20,7 @@ public class StaticData
         playerData = new PlayerData();//the new is just in case you want to change the struct to a class
         playerData.position = Vector3.zero;
         playerData.rotation = Quaternion.identity;
-        playerData.health = 3;
+        playerData.damage = 3;
      }    
      public PlayerData playerData;
 }
@@ -27,49 +28,71 @@ public class StaticData
 
 public class CharacterManager : MonoBehaviour
 {
-    public Image[] hearts;
     float speed = 2f;
     Rigidbody2D rigidbody;
     public float    jumpForce = 0.7f;
     public bool isGrounded;
     Animator anim;
-    private int _health;
 
     public BoxCollider2D    collider2D;
+    int _health;
+    public Image[] hearts;
+
+    void EnabledHearts()
+    {
+        if (_health == 3)
+        {
+            hearts[0].enabled = true;
+            hearts[1].enabled = true;
+            hearts[2].enabled = true;
+        }
+        if (_health == 2)
+        {
+            hearts[0].enabled = true;
+            hearts[1].enabled = true;
+            hearts[2].enabled = false;
+        }
+        if (_health == 1)
+        {
+            hearts[0].enabled = true;
+            hearts[1].enabled = false;
+            hearts[2].enabled = false;
+        }
+        if (_health == 0)
+        {
+            hearts[0].enabled = false;
+            hearts[1].enabled = false;
+            hearts[2].enabled = false;
+        }
+    }
     void Start()
     {
+        _health = StaticData.Instance.playerData.damage;
+        EnabledHearts();
         transform.position = StaticData.Instance.playerData.position;
         transform.rotation = StaticData.Instance.playerData.rotation;
         rigidbody = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        _health = StaticData.Instance.playerData.health;
+        Debug.Log(StaticData.Instance.playerData.damage);
     }
     // Update is called once per frame
     void OnCollisionEnter2D(Collision2D col)
  	{
-         int i = 3;
-
      	if (col.gameObject.tag == ("Ground") && isGrounded == false)
-     	{
          	isGrounded = true;
-     	}
-         Debug.Log(_health);
-        if (col.gameObject.tag == ("Enemy") && _health > 0)
-     	{
-         	_health--;
-             hearts[_health].enabled = false;
-     	}
-        if (_health == 0)
-            Debug.Log("GAME OVER");
+
+        if (col.gameObject.tag == ("Enemy"))
+            Hurt();
 
  	}
     private PlayerData GetData()
     {
          return new PlayerData
          {
-             position = transform.position,
-             rotation = transform.rotation
+            position = transform.position,
+            rotation = transform.rotation,
+            damage = _health,
          };
      }
 
@@ -94,5 +117,17 @@ public class CharacterManager : MonoBehaviour
         }
         transform.position = temp;
         StaticData.Instance.playerData = GetData();
+    }
+    void Hurt()
+    {
+        if (_health >= 0 && _health <= 3)
+        {
+            if (_health != 0)
+                _health--;
+            EnabledHearts();
+            Debug.Log(_health);
+        }
+        else if (_health == 0)
+            Debug.Log("FINISH");
     }
 }

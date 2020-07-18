@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TransitionBetweenLevels : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class TransitionBetweenLevels : MonoBehaviour
 		{
 			Cursor.visible = false;
 			_image.color = Color.black;
-			Application.LoadLevel(nextLevel);
+			SceneManager.LoadScene(nextLevel, LoadSceneMode.Single);
 		}
 	}
 }
