@@ -10,6 +10,9 @@ TagManager:
   - wall
   - Menu
   - menu_button
+  - teleport_item
+  - character_position_past
+  - transition
   layers:
   - Default
   - TransparentFX

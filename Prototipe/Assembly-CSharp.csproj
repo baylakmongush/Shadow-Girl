@@ -36,13 +36,16 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Effects\TransitionBetweenLevels.cs" />
+     <Compile Include="Assets\Scripts\GameInitialize.cs" />
      <Compile Include="Assets\Scripts\PlayScene\BoxMovement.cs" />
      <Compile Include="Assets\Scripts\PlayScene\CameraController.cs" />
      <Compile Include="Assets\Scripts\PlayScene\CharacterManager.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\PlayScene\Health.cs" />
      <Compile Include="Assets\Scripts\PlayScene\Menu.cs" />
-     <Compile Include="Assets\Scripts\PlayScene\TeleportToPast.cs" />
-     <Compile Include="Assets\Scripts\PlayScene\TeleportToPresent.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\Teleport.cs" />
+     <Compile Include="Assets\Scripts\PlayScene\TeleportBug.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
