@@ -11,6 +11,7 @@ public class Teleport : MonoBehaviour
     static Vector3  position;
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class Teleport : MonoBehaviour
         {
             if (GameObject.FindGameObjectWithTag("teleport_item") != null)
                 Destroy(GameObject.FindGameObjectWithTag("teleport_item"));
+            GameObject.FindGameObjectWithTag("Skarabei").GetComponent<Image>().enabled = true;
             if (pressed && Input.GetKeyDown(KeyCode.T))
             {
                 GameObject.FindGameObjectWithTag("transition").GetComponent<Image>().enabled = true;
@@ -44,5 +46,7 @@ public class Teleport : MonoBehaviour
                 pressed = true;
             }
         }
+        else
+            GameObject.FindGameObjectWithTag("Skarabei").GetComponent<Image>().enabled = false;
     }
 }

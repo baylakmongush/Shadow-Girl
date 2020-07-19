@@ -97,9 +97,8 @@ public class CharacterManager : MonoBehaviour
      	if (col.gameObject.tag == ("Ground") && isGrounded == false)
          	isGrounded = true;
 
-        if (col.gameObject.tag == ("Enemy"))
+        if (col.gameObject.tag == ("Enemy") || col.gameObject.tag == ("Hole"))
             Hurt();
-
  	}
     private PlayerData GetData()
     {
@@ -137,8 +136,9 @@ public class CharacterManager : MonoBehaviour
         MovePerson();
         if (GameObject.FindWithTag("arm").GetComponent<Arm>().Tumbler == true)
         {
-            Destroy(GameObject.FindGameObjectWithTag("door")); // удаление двери
-            GameObject.FindGameObjectWithTag("arm").transform.position = new Vector2(15, GameObject.FindGameObjectWithTag("arm").transform.position.y); // перемещение тумблера
+            if (GameObject.FindGameObjectWithTag("door") != null)
+                if (!GameObject.FindWithTag("door").GetComponent<AudioSource>().isPlaying)
+                    GameObject.FindWithTag("door").GetComponent<AudioSource>().Play();
         }
         StaticData.Instance.playerData = GetData();
     }

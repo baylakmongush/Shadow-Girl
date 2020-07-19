@@ -24,6 +24,8 @@ TagManager:
   - wall1
   - wall2
   - wall4
+  - Skarabei
+  - Hole
   layers:
   - Default
   - TransparentFX
@@ -35,8 +37,8 @@ TagManager:
   - 
   - man
   - arm
-  - 
-  - 
+  - enemy
+  - teleport
   - 
   - 
   - 

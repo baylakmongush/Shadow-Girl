@@ -19,6 +19,11 @@ public class OpenToPyramid : MonoBehaviour
 		Cursor.visible = false;
 	}
 
+    void Start()
+    {
+        GameObject.FindGameObjectWithTag("door").GetComponent<AudioSource>().Stop();
+    }
+
 	void Update ()
 	{
 		if(sceneStarting) StartScene();
@@ -47,9 +52,13 @@ public class OpenToPyramid : MonoBehaviour
 		{
 			Cursor.visible = false;
 			_image.color = Color.black;
+            Destroy(GameObject.FindGameObjectWithTag("door")); // удаление двери
+            GameObject.FindWithTag("teleport").GetComponent<Teleport>().Tumbler = false;
+            GameObject.FindGameObjectWithTag("arm").transform.position = new Vector2(15, GameObject.FindGameObjectWithTag("arm").transform.position.y); // перемещение тумблера
             GameObject.FindGameObjectWithTag("character").transform.position = new Vector2(40, GameObject.FindGameObjectWithTag("character").transform.position.y);
             sceneEnd = false;
             GameObject.FindGameObjectWithTag("location").GetComponent<Image>().enabled = false;
+            Cursor.visible = true;
 		}
 	}
 }

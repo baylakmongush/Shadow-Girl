@@ -36,8 +36,6 @@ public class Arm : MonoBehaviour
             Tumbler = true;
             GameObject.FindGameObjectWithTag("location").GetComponent<Image>().enabled = true;
             GameObject.FindGameObjectWithTag("location").GetComponent<OpenToPyramid>().sceneEnd = true;
-            //GameObject.FindGameObjectWithTag("location").GetComponent<OpenToPyramid>().sceneEnd = false;
-            //GameObject.FindGameObjectWithTag("location").GetComponent<Image>().enabled = false;
         }
         else
             anim.SetBool("open", false);
