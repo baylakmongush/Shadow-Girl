@@ -18,6 +18,12 @@ TagManager:
   - hearts
   - MenuButton
   - GameOver
+  - arm
+  - door
+  - location
+  - wall1
+  - wall2
+  - wall4
   layers:
   - Default
   - TransparentFX
@@ -27,8 +33,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - man
+  - arm
   - 
   - 
   - 

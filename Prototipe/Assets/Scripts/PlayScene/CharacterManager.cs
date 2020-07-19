@@ -111,26 +111,35 @@ public class CharacterManager : MonoBehaviour
          };
      }
 
-    void FixedUpdate()
+    void MovePerson()
     {
         Vector3 temp = GameObject.FindWithTag("teleport").GetComponent<Teleport>().Position(transform.position);
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        if (horizontal > 0)
-            anim.SetBool("walk_left", true);
-        else
-            anim.SetBool("walk_left", false);
-        if (horizontal < 0)
-            anim.SetBool("walk_right", true);
-        else
-            anim.SetBool("walk_right", false);
-        rigidbody.velocity = new Vector2(horizontal * speed, rigidbody.velocity.y);
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            if (horizontal > 0)
+                anim.SetBool("walk_left", true);
+            else
+                anim.SetBool("walk_left", false);
+            if (horizontal < 0)
+                anim.SetBool("walk_right", true);
+            else
+                anim.SetBool("walk_right", false);
+            rigidbody.velocity = new Vector2(horizontal * speed, rigidbody.velocity.y);
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                //anim.SetBool("walk_right", true);
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
+            transform.position = temp;
+    }
+    void FixedUpdate()
+    {
+        MovePerson();
+        if (GameObject.FindWithTag("arm").GetComponent<Arm>().Tumbler == true)
         {
-            //anim.SetBool("walk_right", true);
-            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-            isGrounded = false;
+            Destroy(GameObject.FindGameObjectWithTag("door")); // удаление двери
+            GameObject.FindGameObjectWithTag("arm").transform.position = new Vector2(15, GameObject.FindGameObjectWithTag("arm").transform.position.y); // перемещение тумблера
         }
-        transform.position = temp;
         StaticData.Instance.playerData = GetData();
     }
     void Hurt()
