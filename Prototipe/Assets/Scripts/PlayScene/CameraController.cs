@@ -18,12 +18,14 @@ public class CameraController : MonoBehaviour
              v.x = target.position.x;
             if (GameObject.FindGameObjectWithTag("character").transform.position.x >= -13 &&
             GameObject.FindGameObjectWithTag("character").transform.position.x <= 30 &&
-            GameObject.FindGameObjectWithTag("character").transform.position.x > GameObject.FindGameObjectWithTag("wall").transform.position.x &&
-            GameObject.FindGameObjectWithTag("character").transform.position.x < GameObject.FindGameObjectWithTag("wall1").transform.position.x)
+            GameObject.FindGameObjectWithTag("character").transform.position.x > GameObject.FindGameObjectWithTag("wall").transform.position.x)
             {
-                if (GameObject.FindWithTag("arm").GetComponent<Arm>().Tumbler == false)
+                if (GameObject.FindGameObjectWithTag("character") != null)
                 {
-                        transform.position = Vector3.MoveTowards(transform.position, v, trackSpeed * Time.deltaTime);
+                    if (GameObject.FindWithTag("arm").GetComponent<Arm>().Tumbler == false &&  GameObject.FindGameObjectWithTag("character").transform.position.x < GameObject.FindGameObjectWithTag("wall1").transform.position.x)
+                    {
+                            transform.position = Vector3.MoveTowards(transform.position, v, trackSpeed * Time.deltaTime);
+                    }
                 }
             }
             if (GameObject.FindGameObjectWithTag("character").transform.position.x > GameObject.FindGameObjectWithTag("wall2").transform.position.x)
