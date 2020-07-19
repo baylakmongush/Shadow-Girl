@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour
     {
         audioData = GameObject.FindWithTag("MenuButton").GetComponent<AudioSource>();
         audioData.Stop();
+        Cursor.visible = true;
     }
     public void ClickButton()
     {
@@ -32,7 +33,7 @@ public class Menu : MonoBehaviour
     }
 
     public void ReturnGame()
-    {
+    { 
         GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
         Time.timeScale = 1f;
         audioData.Stop();
@@ -45,11 +46,29 @@ public class Menu : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex,LoadSceneMode.Single);
+        Cursor.visible = true;
     }
 
     public void Help()
     {
-        
+        GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
+        GameObject.FindWithTag("Help").GetComponent<Canvas>().enabled = true;
+        if(Input.GetKeyDown("escape"))
+        {
+            GameObject.FindWithTag("Help").GetComponent<Canvas>().enabled = false;
+            GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = true;
+        }
+    }
+    
+    public void Update()
+    {
+        if(Input.GetKeyDown("escape"))
+        {
+            GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
+            Time.timeScale = 1f;
+            audioData.Stop();
+        }
+
     }
 }

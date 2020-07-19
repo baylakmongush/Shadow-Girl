@@ -26,6 +26,7 @@ TagManager:
   - wall4
   - Skarabei
   - Hole
+  - Help
   layers:
   - Default
   - TransparentFX
