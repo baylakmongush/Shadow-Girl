@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     bool pressed;
+    bool pressed_help;
     AudioSource audioData;
     void Start()
     {
@@ -46,7 +47,10 @@ public class Menu : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex,LoadSceneMode.Single);
+            //Get current scene name
+        string scene = SceneManager.GetActiveScene().name;
+        //Load it
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
         Cursor.visible = true;
     }
 
@@ -54,11 +58,7 @@ public class Menu : MonoBehaviour
     {
         GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
         GameObject.FindWithTag("Help").GetComponent<Canvas>().enabled = true;
-        if(Input.GetKeyDown("escape"))
-        {
-            GameObject.FindWithTag("Help").GetComponent<Canvas>().enabled = false;
-            GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = true;
-        }
+        Time.timeScale = 0f;
     }
     
     public void Update()
@@ -68,6 +68,14 @@ public class Menu : MonoBehaviour
             GameObject.FindWithTag("Menu").GetComponent<Canvas>().enabled = false;
             Time.timeScale = 1f;
             audioData.Stop();
+        }
+        if (GameObject.FindWithTag("Help").GetComponent<Canvas>().enabled)
+        {
+            if(Input.GetKeyDown("escape"))
+            {
+                GameObject.FindWithTag("Help").GetComponent<Canvas>().enabled = false;
+                Time.timeScale = 1f;
+            }
         }
 
     }

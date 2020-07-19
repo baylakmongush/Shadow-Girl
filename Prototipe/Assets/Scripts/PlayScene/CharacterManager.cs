@@ -73,6 +73,11 @@ public class CharacterManager : MonoBehaviour
             hearts[2].enabled = false;
             GameObject.FindWithTag("GameOver").GetComponent<AudioSource>().Play();
             Debug.Log("FINISH");
+            if (PlayerPrefs.GetInt("high_score") == null)
+                PlayerPrefs.SetInt("high_score", PlayerPrefs.GetInt("score"));
+            else if (PlayerPrefs.GetInt("high_score") < PlayerPrefs.GetInt("score"))
+                PlayerPrefs.SetInt("high_score", PlayerPrefs.GetInt("score"));
+
         }
     }
     void Start()
@@ -133,7 +138,7 @@ public class CharacterManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        MovePerson();
+            MovePerson();
         if (GameObject.FindWithTag("arm").GetComponent<Arm>().Tumbler == true)
         {
             if (GameObject.FindGameObjectWithTag("door") != null)
