@@ -1,3 +1,3 @@
 # Shadow Girl by Cranberry guys
 
-//добавить прохождение игры, скриншоты, описание
+ ![alt text](https://github.com/npetrelli/gamejam/blob/master/Main_game.png "Main page")
